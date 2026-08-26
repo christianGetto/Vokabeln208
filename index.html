@@ -1,0 +1,56 @@
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Vocab Game Zone</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:#10131d;color:#fff;min-height:100vh}.w{max-width:950px;margin:auto;padding:22px}button,input{font:inherit}.top{display:flex;justify-content:space-between;align-items:center;gap:10px}.btn,.tag{padding:12px 16px;border:1px solid #39405a;border-radius:15px;background:#242a3d;color:white;font-weight:800}.btn{cursor:pointer}h1{font-size:clamp(38px,8vw,72px);line-height:.95;margin:35px 0 12px}.muted{color:#aab2c8}.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:28px}.tile{padding:22px;min-height:155px;border:1px solid #39405a;border-radius:24px;background:#1b2030;color:#fff;text-align:left}.tile strong{font-size:25px}.tile i{display:block;font-style:normal;font-size:35px;margin-bottom:12px}.tile span{display:block;color:#aab2c8;margin-top:8px}.panel{margin-top:20px;padding:24px;border:1px solid #39405a;border-radius:25px;background:#1b2030}.q{text-align:center;font-size:clamp(28px,6vw,48px);font-weight:900;margin:30px}.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ans{min-height:70px;padding:15px;border:1px solid #39405a;border-radius:16px;background:#293047;color:white;font-weight:800}.fb{text-align:center;min-height:35px;margin:16px;font-weight:900}.input{width:100%;padding:18px;background:#111624;color:white;border:1px solid #39405a;border-radius:16px;text-align:center;font-size:22px}.actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:18px}.keys{display:flex;flex-wrap:wrap;gap:7px;justify-content:center}.key{width:44px;height:44px;border:0;border-radius:9px;background:#343c56;color:#fff;font-weight:900}.slots{text-align:center;font-size:27px;font-weight:900;letter-spacing:.12em;margin:20px}.memory{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.mem{min-height:90px;padding:7px;border:1px solid #39405a;border-radius:13px;background:#2b324a;color:white;font-weight:750}.hidden{font-size:0}.hidden:after{content:"?";font-size:27px}.matched{background:#1d4a3e}.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.box{background:#131827;padding:15px;border-radius:16px}.row{padding:7px 0;border-bottom:1px solid #30364b;font-size:14px}.score{text-align:center;font-size:65px;font-weight:900}
+@media(max-width:650px){.grid,.answers,.cols{grid-template-columns:1fr}.memory{grid-template-columns:repeat(4,1fr)}.mem{font-size:12px;min-height:76px}}
+</style></head><body><main class=w id=app></main><script>
+const W=[["deadly","tödlich"],["spider","Spinne"],["likely","wahrscheinlich"],["allergic (to)","allergisch (gegen)"],["sting","(Insekten-)Stich"],["sting, stung, stung","stechen (Insekt); brennen"],["salt","Salz"],["pepper","Pfeffer"],["spot","Stelle, Ort; Fleck"],["expect","erwarten"],["litre","Liter"],["break down","eine Panne haben, kaputtgehen (Auto)"],["shade","Schatten"],["shadow","Schatten"],["light, lit, lit","anzünden"],["heat","Hitze, Wärme"],["I'm/I feel sick.","Mir ist schlecht/übel."],["cool down","sich abkühlen; sich beruhigen"],["bite","Biss, (Insekten-)Stich"],["still","still, ruhig"],["phone for an ambulance","einen Krankenwagen rufen"]];
+const A=document.getElementById("app");
+let S={};
+try{ S=JSON.parse(localStorage.getItem("vgz")||"{}"); }catch(e){ S={}; }
+function sh(a){
+  const b=[...a];
+  for(let j=b.length-1;j>0;j--){
+    const k=Math.floor(Math.random()*(j+1));
+    [b[j],b[k]]=[b[k],b[j]];
+  }
+  return b;
+}
+const LAST={pick:[],type:[],rescue:[],memory:[]};
+function freshSample(n,p=W,game=""){
+  let pool=[...p], last=LAST[game]||[];
+  let preferred=pool.filter(x=>!last.includes(x[0]));
+  let chosen=[];
+  if(preferred.length>=n) chosen=sh(preferred).slice(0,n);
+  else{
+    chosen=sh(preferred);
+    let remaining=pool.filter(x=>!chosen.some(c=>c[0]===x[0]));
+    chosen=chosen.concat(sh(remaining).slice(0,n-chosen.length));
+  }
+  if(game) LAST[game]=chosen.map(x=>x[0]);
+  return sh(chosen);
+}
+const sm=(n,p=W)=>sh(p).slice(0,Math.min(n,p.length));
+function save(){try{localStorage.setItem("vgz",JSON.stringify(S))}catch(e){}}function rec(e,ok,w){S[e]??={r:0,x:0,p:0};S[e][ok?"r":"x"]++;S[e].p+=ok?w:-w;save()}
+function lvl(e){let s=S[e];if(!s||s.r+s.x<2)return"practice";let rt=s.r/(s.r+s.x);if(s.p>=4&&rt>=.75)return"safe";if(s.x>=2&&rt<.55)return"hard";return"practice"}
+function head(t,p=""){return `<div class=top><button class=btn onclick=menu()>⌂ Hauptmenü</button><b>${t}</b><span class=tag>${p}</span></div>`}
+function menu(){let n=W.filter(x=>lvl(x[0])==="safe").length;A.innerHTML=`<div class=top><b>VOCAB GAME ZONE</b><span class=tag>${n}/21 sicher ✓</span></div><h1>PLAY.<br>LEARN.<br>LEVEL UP.</h1><div class=muted>Deutsch sehen. Englisch können. Vier Games – ein Lernstand.</div><div class=grid>
+<button class=tile onclick=pickStart()><i>⚡</i><strong>PICK IT!</strong><span>Easy · richtige englische Lösung wählen</span></button>
+<button class=tile onclick=typeStart()><i>⌨️</i><strong>TYPE IT!</strong><span>Challenge · englische Lösung selbst schreiben</span></button>
+<button class=tile onclick=rescueStart()><i>🛟</i><strong>WORD RESCUE</strong><span>Englisches Wort Buchstabe für Buchstabe</span></button>
+<button class=tile onclick=memoryStart()><i>🧠</i><strong>MEMORY</strong><span>Deutsch ↔ Englisch finden</span></button>
+<button class=tile onclick=report()><i>📊</i><strong>MY WORDS</strong><span>Was sitzt schon sicher?</span></button>
+<button class=tile onclick=weak()><i>🎯</i><strong>TRAIN HARD WORDS</strong><span>Gezielt unsichere Wörter üben</span></button></div>`}
+let R=[],i=0,score=0;
+function pickStart(p=W){R=freshSample(10,p,"pick");i=0;score=0;pickQ()}function pickQ(){if(i>=R.length)return end("PICK IT!",score,R.length);let [e,d]=R[i],o=sh([e,...sm(3,W.filter(x=>x[0]!=e)).map(x=>x[0])]);A.innerHTML=head("PICK IT!",`${i+1}/${R.length}`)+`<div class=panel><div class=q>${d}</div><div class=answers>${o.map(x=>`<button class=ans onclick='pick(${JSON.stringify(x)},${JSON.stringify(e)})'>${x}</button>`).join("")}</div><div id=f class=fb></div></div>`}
+function pick(x,e){let ok=x===e;rec(e,ok,1);if(ok)score++;document.querySelectorAll(".ans").forEach(b=>b.disabled=1);document.getElementById("f").innerHTML=ok?"✓ Richtig!":"✗ Richtig ist: "+e;setTimeout(()=>{i++;pickQ()},850)}
+function typeStart(p=W){R=freshSample(10,p,"type");i=0;score=0;typeQ()}function typeQ(){if(i>=R.length)return end("TYPE IT!",score,R.length);let[e,d]=R[i];A.innerHTML=head("TYPE IT!",`${i+1}/${R.length}`)+`<div class=panel><div class=q>${d}</div><input id=t class=input autocorrect=off autocapitalize=off spellcheck=false placeholder="English …"><div class=actions><button class=btn onclick=check()>CHECK ✓</button></div><div id=f class=fb></div></div>`;document.getElementById("t").focus();document.getElementById("t").onkeydown=x=>{if(x.key==="Enter")check()}}
+function norm(x){return x.trim().toLowerCase().replace(/[’]/g,"'").replace(/\s+/g," ")}function check(){let e=R[i][0],x=norm(document.getElementById("t").value),ok=e==="I'm/I feel sick."?["i'm sick","i feel sick","i'm sick.","i feel sick."].includes(x):x===norm(e);rec(e,ok,2);if(ok)score++;document.getElementById("t").disabled=1;document.getElementById("f").innerHTML=ok?"✓ Richtig!":"✗ Richtig ist: "+e;setTimeout(()=>{i++;typeQ()},1000)}
+let target="",used=[],miss=0;function rescueStart(p=W){let q=p.filter(x=>/^[a-zA-Z ]+$/.test(x[0]));R=freshSample(8,q,"rescue");i=0;score=0;rescueQ()}function rescueQ(){if(i>=R.length)return end("WORD RESCUE",score,R.length);target=R[i][0];used=[];miss=0;draw()}
+function draw(){let slots=[...target].map(c=>c===" "?"  ":used.includes(c.toLowerCase())?c:"_").join(" ");A.innerHTML=head("WORD RESCUE",`${i+1}/${R.length}`)+`<div class=panel><div class=q>${R[i][1]}</div><div class=slots>${slots}</div><div class=fb>${miss}/6 Fehlversuche</div><div class=keys>${"abcdefghijklmnopqrstuvwxyz".split("").map(l=>`<button class=key ${used.includes(l)?"disabled":""} onclick="guess('${l}')">${l.toUpperCase()}</button>`).join("")}</div></div>`}
+function guess(l){if(used.includes(l))return;used.push(l);if(!target.toLowerCase().includes(l))miss++;let won=[...target.toLowerCase()].filter(c=>/[a-z]/.test(c)).every(c=>used.includes(c));if(won||miss>=6){rec(target,won,1);if(won)score++;setTimeout(()=>{alert(won?"Richtig! "+target:"Lösung: "+target);i++;rescueQ()},80)}else draw()}
+let M=[],first=null,lock=false,mat=0,moves=0;function memoryStart(){let p=freshSample(8,W,"memory");M=sh(p.flatMap(([e,d],k)=>[{x:e,k,e},{x:d,k,e}]));first=null;lock=false;mat=0;moves=0;memDraw()}function memDraw(){A.innerHTML=head("MEMORY",`${mat}/8`)+`<div class=panel><div class="muted" style="text-align:center;margin-bottom:12px">Deutsch ↔ Englisch · Züge: ${moves}</div><div class=memory>${M.map((c,j)=>`<button id=m${j} class="mem hidden" onclick=flip(${j})>${c.x}</button>`).join("")}</div></div>`}
+function flip(j){if(lock)return;let b=document.getElementById("m"+j);if(!b.classList.contains("hidden"))return;b.classList.remove("hidden");if(first===null){first=j;return}moves++;if(M[first].k===M[j].k){b.classList.add("matched");document.getElementById("m"+first).classList.add("matched");rec(M[j].e,true,.75);mat++;first=null;if(mat===8)setTimeout(()=>end("MEMORY",8,8),400)}else{lock=true;rec(M[j].e,false,.25);let z=first;setTimeout(()=>{document.getElementById("m"+z)?.classList.add("hidden");document.getElementById("m"+j)?.classList.add("hidden");first=null;lock=false},650)}}
+function end(n,s,t){A.innerHTML=head(n,"Fertig!")+`<div class=panel><div class=score>${s}/${t}</div><div class="muted" style="text-align:center">Dein Lernstand wurde gespeichert.</div><div class=actions><button class=btn onclick=menu()>⌂ Hauptmenü</button><button class=btn onclick=report()>📊 MY WORDS</button></div></div>`}
+function report(){let g={safe:[],practice:[],hard:[]};W.forEach(x=>g[lvl(x[0])].push(x));let box=(k,t,e)=>`<div class=box><h3>${e} ${t}</h3>${g[k].length?g[k].map(x=>`<div class=row><b>${x[0]}</b><br><span class=muted>${x[1]}</span></div>`).join(""):"Noch keine."}</div>`;A.innerHTML=head("MY WORDS",`${g.safe.length}/21 sicher`)+`<div class=panel><div class=cols>${box("safe","SICHER","🟢")}${box("practice","NOCH ÜBEN","🟡")}${box("hard","SCHWIERIG","🔴")}</div><div class=actions><button class=btn onclick=weak()>🎯 Schwierige Wörter üben</button><button class=btn onclick=reset()>Fortschritt zurücksetzen</button></div><div class="muted" style="text-align:center">Selbst geschriebene Lösungen zählen stärker als Auswahl- und Memory-Treffer.</div></div>`}
+function weak(){let p=W.filter(x=>lvl(x[0])!=="safe");typeStart(p.length>=4?p:W)}function reset(){if(confirm("Fortschritt wirklich zurücksetzen?")){S={};save();report()}}menu();
+</script></body></html>
