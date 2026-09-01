@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#183c35">
+<title>Life Down Under – Vocabulary Test</title>
+<style>
+:root{
+  --green:#183c35;
+  --green2:#255f4f;
+  --euca:#6d8b78;
+  --sand:#f3ead8;
+  --cream:#fffaf1;
+  --ochre:#d49745;
+  --coral:#cf6b5c;
+  --ink:#25312e;
+  --soft:#e9efe9;
+  --white:#fff;
+  --shadow:0 18px 50px rgba(23,45,39,.18);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Inter,ui-rounded,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:
+radial-gradient(circle at 15% 8%,rgba(212,151,69,.20),transparent 28%),
+radial-gradient(circle at 90% 18%,rgba(109,139,120,.18),transparent 28%),
+linear-gradient(145deg,#f7f0e3,#eef3ec 55%,#f7eddc);}
+body{padding:22px}
+.app{max-width:980px;margin:auto;background:rgba(255,250,241,.96);border:1px solid rgba(24,60,53,.12);border-radius:30px;overflow:hidden;box-shadow:var(--shadow);position:relative}
+.app:before,.app:after{content:"";position:absolute;border-radius:50%;pointer-events:none;opacity:.18}
+.app:before{width:260px;height:260px;background:var(--ochre);right:-130px;top:300px}
+.app:after{width:220px;height:220px;background:var(--euca);left:-120px;bottom:100px}
+.hero{position:relative;min-height:410px;background:#15382f;overflow:hidden}
+.hero img{width:100%;height:410px;object-fit:cover;object-position:center 43%;display:block;filter:saturate(.9) contrast(1.02) brightness(.78)}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,40,33,.87) 0%,rgba(13,40,33,.50) 45%,rgba(13,40,33,.10) 75%),linear-gradient(0deg,rgba(13,40,33,.48),transparent 45%)}
+.hero-content{position:absolute;z-index:3;left:42px;top:42px;width:min(540px,70%);color:white}
+.kicker{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.42);background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border-radius:999px;padding:8px 13px;font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.hero h1{font-size:clamp(42px,7vw,76px);line-height:.9;margin:25px 0 10px;letter-spacing:-.045em;text-transform:uppercase;text-shadow:0 4px 18px rgba(0,0,0,.24)}
+.hero h1 span{display:block;color:#f0bd71;font-style:italic;font-size:.82em}
+.subtitle{font-size:15px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;opacity:.92}
+.hero-note{margin-top:24px;font-size:15px;line-height:1.45;max-width:440px;color:#f7f2e8}
+.eucalyptus{position:absolute;z-index:4;right:24px;bottom:20px;font-size:34px;transform:rotate(-8deg);filter:drop-shadow(0 4px 8px #0004)}
+.ribbon{display:flex;gap:12px;flex-wrap:wrap;padding:16px 28px;background:#f5e7cc;border-bottom:1px solid rgba(24,60,53,.12)}
+.pill{background:white;border:1px solid rgba(24,60,53,.13);border-radius:999px;padding:9px 13px;font-size:12px;font-weight:800;color:var(--green)}
+section{padding:30px 34px;position:relative;z-index:2}
+.card{background:rgba(255,255,255,.86);border:1px solid rgba(24,60,53,.12);border-radius:22px;padding:22px;box-shadow:0 10px 28px rgba(38,62,55,.07)}
+.start-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:20px}
+.side-card{background:linear-gradient(145deg,#214f43,#173a32);color:#fff}
+.side-card h3{margin-top:0;font-size:21px}
+.side-card p{opacity:.86;line-height:1.5}
+.feature{display:flex;gap:10px;align-items:flex-start;margin:13px 0;font-size:14px}
+.icon{width:30px;height:30px;border-radius:10px;background:rgba(255,255,255,.12);display:grid;place-items:center;flex:0 0 auto}
+label{font-size:13px;font-weight:900;color:var(--green);letter-spacing:.03em}
+input[type=text],input[type=password]{width:100%;padding:14px 15px;border:2px solid #d7ddda;border-radius:14px;background:#fff;font:inherit;font-size:17px;outline:none;margin:7px 0 16px;transition:.15s}
+input:focus{border-color:var(--ochre);box-shadow:0 0 0 4px rgba(212,151,69,.14)}
+button{appearance:none;border:0;border-radius:15px;padding:14px 19px;background:var(--green);color:white;font:inherit;font-weight:900;letter-spacing:.02em;cursor:pointer;box-shadow:0 8px 18px rgba(24,60,53,.18)}
+button:hover{transform:translateY(-1px)}
+.start-btn{font-size:17px;width:100%;margin-top:8px;background:linear-gradient(135deg,#c98738,#e1aa62);color:#1d352f}
+.checkbox-row{display:flex;align-items:center;gap:9px;background:#f5f7f4;border-radius:13px;padding:12px 13px;margin:2px 0 14px}
+.checkbox-row input{width:20px;height:20px;accent-color:var(--green)}
+.hidden{display:none!important}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.test-title{margin:0;color:var(--green);font-size:28px}
+.progress-wrap{background:#dde5e0;height:9px;border-radius:999px;overflow:hidden;margin:4px 0 24px}
+.progress{height:100%;width:0;background:linear-gradient(90deg,var(--ochre),var(--green2));transition:.25s}
+.level{border-radius:22px;padding:20px;margin:18px 0;border:1px solid rgba(24,60,53,.12);background:white;overflow:hidden}
+.level-head{display:flex;justify-content:space-between;align-items:center;margin:-20px -20px 16px;padding:14px 18px;color:white;font-weight:900}
+.easy .level-head{background:#588363}
+.medium .level-head{background:#c9893e}
+.hard .level-head{background:#a95549}
+.level-head small{font-weight:700;opacity:.9}
+.q{padding:15px 0;border-bottom:1px dashed #d9dedb}
+.q:last-child{border-bottom:0}
+.prompt{font-weight:900;font-size:16px;margin-bottom:3px}
+.hint{font-size:12px;color:#76817c;margin-bottom:7px}
+.result-row{padding:14px;border-radius:14px;margin:10px 0;border-left:6px solid}
+.ok{background:#edf6ef;border-color:#4f805c}
+.half{background:#fff4dc;border-color:#c98b3f}
+.bad{background:#f9e8e5;border-color:#a95448}
+.scorebox{background:linear-gradient(135deg,#1b473c,#275c4f);color:white;border-radius:20px;padding:22px;margin:18px 0}
+.scorebig{font-size:42px;font-weight:950;letter-spacing:-.04em}
+.note{display:inline-block;background:#efb866;color:#17362f;padding:8px 13px;border-radius:999px;font-weight:950;margin-top:8px}
+.alert{background:#fff0ed;border:1px solid #edc1b8;color:#833f36;padding:14px;border-radius:14px}
+.footer{padding:18px 28px;background:#173a32;color:#d8e8e0;font-size:12px;text-align:center;letter-spacing:.04em}
+@media(max-width:720px){
+ body{padding:0}
+ .app{border-radius:0;min-height:100vh}
+ .hero,.hero img{height:350px;min-height:350px}
+ .hero-content{left:24px;top:28px;width:72%}
+ .hero h1{font-size:48px}
+ section{padding:22px 18px}
+ .start-grid{grid-template-columns:1fr}
+ .side-card{order:-1}
+}
+</style>
+</head>
+<body>
+<main class="app">
+  <header class="hero">
+    <img src="koala.png" alt="Koala im Eukalyptusbaum">
+    <div class="hero-content">
+      <div class="kicker">🇦🇺 Unit 1 · Class 9e</div>
+      <h1>Life <span>Down Under</span></h1>
+      <div class="subtitle">Vocabulary Test</div>
+      <div class="hero-note">Ready for Australia? Your test is randomized, fair and automatically checked.</div>
+    </div>
+    <div class="eucalyptus">🌿</div>
+  </header>
+
+  <div class="ribbon">
+    <span class="pill">12 WORDS</span>
+    <span class="pill">3 LEVELS</span>
+    <span class="pill">RANDOMIZED</span>
+    <span class="pill">AUTO CHECK</span>
+    <span class="pill">LRS MODE</span>
+  </div>
+
+  <section id="start">
+    <div class="start-grid">
+      <div class="card">
+        <h2 style="margin-top:0;color:var(--green);font-size:30px">Let’s go. 🦘</h2>
+        <p style="margin-top:-6px;color:#6c7772">Enter your name and start your personal test.</p>
+
+        <label for="name">NAME</label>
+        <input id="name" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+
+        <label for="klasse">CLASS</label>
+        <input id="klasse" type="text" value="9e" autocomplete="off" autocorrect="off" spellcheck="false">
+
+        <div class="checkbox-row">
+          <input id="lrs" type="checkbox">
+          <label for="lrs" style="margin:0">LRS-Modus aktivieren</label>
+        </div>
+
+        <button class="start-btn" id="startBtn">START TEST →</button>
+      </div>
+
+      <aside class="card side-card">
+        <h3>Fair for everyone.</h3>
+        <p>Every test is newly mixed, but the difficulty stays comparable.</p>
+        <div class="feature"><div class="icon">🟢</div><div><b>Easy</b><br>3 zufällige Wörter</div></div>
+        <div class="feature"><div class="icon">🟠</div><div><b>Medium</b><br>5 zufällige Wörter</div></div>
+        <div class="feature"><div class="icon">🔴</div><div><b>Challenge</b><br>4 zufällige Wörter</div></div>
+        <div class="feature"><div class="icon">🔒</div><div><b>Test mode</b><br>Copy/Paste & Verlassen werden überwacht</div></div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="test" class="hidden">
+    <div class="topbar">
+      <div>
+        <div style="font-size:12px;font-weight:900;letter-spacing:.12em;color:var(--ochre)">LIFE DOWN UNDER</div>
+        <h2 class="test-title">Translate into English.</h2>
+      </div>
+      <div id="counter" style="font-weight:900;color:var(--green)">0 / 12</div>
+    </div>
+    <div class="progress-wrap"><div class="progress" id="progress"></div></div>
+    <div id="questions"></div>
+    <button id="submitBtn" style="width:100%;font-size:17px;margin-top:8px">TEST ABGEBEN 🔒</button>
+  </section>
+
+  <section id="locked" class="hidden">
+    <div class="card" style="max-width:520px;margin:auto;text-align:center">
+      <div style="font-size:52px">🔒</div>
+      <h2 style="color:var(--green)">Test abgegeben</h2>
+      <p>Die Antworten sind gesperrt. Die Korrektur kann nur von der Lehrkraft geöffnet werden.</p>
+      <label for="pw">LEHRERPASSWORT</label>
+      <input id="pw" type="password" autocomplete="off">
+      <p id="pwerr" class="alert hidden">Passwort nicht korrekt.</p>
+      <button id="unlockBtn" style="width:100%">KORREKTUR ÖFFNEN</button>
+    </div>
+  </section>
+
+  <section id="result" class="hidden">
+    <div style="font-size:12px;font-weight:900;letter-spacing:.12em;color:var(--ochre)">TEACHER VIEW</div>
+    <h2 class="test-title">Korrektur</h2>
+    <div id="meta"></div>
+    <div id="scoreBox" class="scorebox"></div>
+    <div id="rows"></div>
+    <div id="fraud"></div>
+    <button id="downloadBtn">Ausführliche Lösung herunterladen</button>
+  </section>
+
+  <div class="footer">LIFE DOWN UNDER · VOCABULARY TEST · UNIT 1 · CLASS 9e</div>
+</main>
+
+<script>
+const pools={
+ easy:[
+  {de:"Spinne",en:["spider"]},
+  {de:"Salz",en:["salt"]},
+  {de:"Pfeffer",en:["pepper"]},
+  {de:"Stelle, Ort; Fleck",en:["spot"]},
+  {de:"erwarten",en:["expect"]},
+  {de:"Liter",en:["litre"]},
+  {de:"Hitze, Wärme",en:["heat"]}
+ ],
+ medium:[
+  {de:"tödlich",en:["deadly"]},
+  {de:"wahrscheinlich",en:["likely"]},
+  {de:"allergisch (gegen)",en:["allergic to"],rule:"allergic"},
+  {de:"(Insekten-)Stich",en:["sting"]},
+  {de:"Schatten",en:["shade","shadow"],rule:"shadeShadow"},
+  {de:"Biss, (Insekten-)Stich",en:["bite"]},
+  {de:"still, ruhig",en:["still"]}
+ ],
+ hard:[
+  {de:"stechen (Insekt); brennen",en:["sting","stung"],display:"sting, stung, stung",rule:"verb"},
+  {de:"eine Panne haben, kaputtgehen (Auto)",en:["break down"]},
+  {de:"anzünden",en:["light","lit"],display:"light, lit, lit",rule:"verb"},
+  {de:"Mir ist schlecht/übel.",en:["i'm sick","i am sick","i feel sick"],display:"I'm / I feel sick.",rule:"sick"},
+  {de:"sich abkühlen; sich beruhigen",en:["cool down"]},
+  {de:"einen Krankenwagen rufen",en:["phone for an ambulance"]}
+ ]
+};
+
+let selected=[],answers=[],started=false,locked=false,fraudEvents=[],resultData=null;
+const $=id=>document.getElementById(id);
+const shuffle=a=>[...a].sort(()=>Math.random()-.5);
+const pick=(a,n)=>shuffle(a).slice(0,n);
+
+function norm(s){
+ return String(s||"").trim().toLowerCase().replace(/[’´`]/g,"'").replace(/[(),/\\-]+/g," ").replace(/\s+/g," ").trim();
+}
+function lev(a,b){
+ a=norm(a);b=norm(b);const m=a.length,n=b.length,d=Array.from({length:m+1},()=>Array(n+1).fill(0));
+ for(let i=0;i<=m;i++)d[i][0]=i;
+ for(let j=0;j<=n;j++)d[0][j]=j;
+ for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));
+ return d[m][n];
+}
+function capPenalty(raw){return /^[A-ZÄÖÜ]/.test(String(raw||"").trim())?.5:0}
+
+function scoreItem(item,raw,lrs){
+ const a=norm(raw);if(!a)return {pts:0,why:"keine Antwort"};const toks=a.split(" ");
+ if(item.rule==="allergic"){
+  const okA=toks.includes("allergic"),okT=toks.includes("to");
+  if(okA&&okT)return {pts:Math.max(0,1-capPenalty(raw)),why:"richtig"};
+  if(okA)return {pts:.5,why:"to fehlt"};
+  const d=Math.min(lev(a,"allergic to"),lev(a,"allergic"));
+  if(lrs&&okT&&d<=2)return {pts:1,why:"LRS"};
+  return {pts:d===1?.5:0,why:d===1?"1 Buchstabe falsch":"nicht korrekt"};
+ }
+ if(item.rule==="shadeShadow"){
+  if(toks.length && toks.every(t=>t==="shade"||t==="shadow"))return {pts:Math.max(0,1-capPenalty(raw)),why:"shade/shadow akzeptiert"};
+  const d=Math.min(lev(a,"shade"),lev(a,"shadow"));
+  if(lrs&&d<=2)return {pts:1,why:"LRS"};
+  return {pts:d===1?.5:0,why:d===1?"1 Buchstabe falsch":"nicht korrekt"};
+ }
+ if(item.rule==="verb"){
+  if(toks.some(t=>item.en.includes(t)))return {pts:Math.max(0,1-capPenalty(raw)),why:"gültige Form"};
+  const d=Math.min(...toks.flatMap(t=>item.en.map(f=>lev(t,f))));
+  if(lrs&&d<=2)return {pts:1,why:"LRS"};
+  return {pts:d===1?.5:0,why:d===1?"1 Buchstabe falsch":"nicht korrekt"};
+ }
+ if(item.rule==="sick"){
+  if(item.en.includes(a))return {pts:1,why:"richtig"};
+  if(a==="sick"||a==="i'm feel sick"||a==="i am feel sick")return {pts:.5,why:"unvollständig/fehlerhaft"};
+  const d=Math.min(...item.en.map(f=>lev(a,f)));
+  if(lrs&&d<=2)return {pts:1,why:"LRS"};
+  return {pts:d===1?.5:0,why:d===1?"1 Buchstabe falsch":"nicht korrekt"};
+ }
+ const d=Math.min(...item.en.map(f=>lev(a,f)));
+ if(d===0)return {pts:Math.max(0,1-capPenalty(raw)),why:capPenalty(raw)?"Großschreibung":"richtig"};
+ if(lrs&&d<=Math.max(2,Math.floor(item.en[0].length*.3)))return {pts:1,why:"LRS"};
+ return {pts:d===1?.5:0,why:d===1?"1 Buchstabe falsch":"nicht korrekt"};
+}
+
+function grade(p){return p>=10.92?1:p>=9.72?2:p>=7.92?3:p>=6?4:p>=3.12?5:6}
+
+function updateProgress(){
+ const fields=[...document.querySelectorAll(".ans")];
+ const done=fields.filter(x=>x.value.trim()).length;
+ $("counter").textContent=`${done} / ${fields.length}`;
+ $("progress").style.width=`${(done/fields.length)*100}%`;
+}
+
+function start(){
+ if(!$("name").value.trim())return alert("Bitte Namen eingeben.");
+ selected=[
+  ...pick(pools.easy,3).map(x=>({...x,level:"easy"})),
+  ...pick(pools.medium,5).map(x=>({...x,level:"medium"})),
+  ...pick(pools.hard,4).map(x=>({...x,level:"hard"}))
+ ];
+ selected=[
+  ...shuffle(selected.filter(x=>x.level==="easy")),
+  ...shuffle(selected.filter(x=>x.level==="medium")),
+  ...shuffle(selected.filter(x=>x.level==="hard"))
+ ];
+ let h="";
+ [["easy","🟢 EASY","Warm-up"],["medium","🟠 MEDIUM","Keep going"],["hard","🔴 CHALLENGE","Show what you know"]].forEach(([level,title,tag])=>{
+   const count=selected.filter(x=>x.level===level).length;
+   h+=`<div class="level ${level}"><div class="level-head"><span>${title}</span><small>${count} WORDS · ${tag}</small></div>`;
+   selected.forEach((x,i)=>{if(x.level===level)h+=`
+    <div class="q">
+      <div class="prompt">${i+1}. ${x.de}</div>
+      <div class="hint">Write the English word. Use lower case.</div>
+      <input class="ans" data-i="${i}" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+    </div>`});
+   h+="</div>";
+ });
+ $("questions").innerHTML=h;
+ document.querySelectorAll(".ans").forEach(x=>x.addEventListener("input",updateProgress));
+ $("start").classList.add("hidden");$("test").classList.remove("hidden");started=true;updateProgress();
+ window.scrollTo(0,0);
+}
+
+function submit(){
+ answers=[...document.querySelectorAll(".ans")].map(x=>x.value.trim());
+ const blanks=answers.filter(x=>!x).length;
+ if(blanks&&!confirm(`Du hast noch ${blanks} Aufgabe(n) nicht beantwortet. Trotzdem abgeben?`))return;
+ if(!blanks&&!confirm("Test wirklich abgeben? Danach können Antworten nicht mehr geändert werden."))return;
+ locked=true;document.querySelectorAll(".ans").forEach(x=>x.disabled=true);
+ $("test").classList.add("hidden");$("locked").classList.remove("hidden");window.scrollTo(0,0);
+}
+
+function unlock(){
+ if(!["Australia","Europa"].includes($("pw").value)){$("pwerr").classList.remove("hidden");return}
+ $("pwerr").classList.add("hidden");correct();
+}
+
+function correct(){
+ const lrs=$("lrs").checked;let total=0,rows=[];
+ selected.forEach((item,i)=>{const s=scoreItem(item,answers[i],lrs);total+=s.pts;rows.push({...item,answer:answers[i],pts:s.pts,why:s.why})});
+ total=Math.round(total*2)/2;
+ resultData={name:$("name").value.trim(),klasse:$("klasse").value.trim()||"9e",lrs,total,note:grade(total),rows,date:new Date().toLocaleString("de-DE"),fraud:[...fraudEvents]};
+ $("locked").classList.add("hidden");$("result").classList.remove("hidden");
+ $("meta").textContent=`${resultData.name} · Klasse ${resultData.klasse} · ${resultData.date} · LRS: ${lrs?"ja":"nein"}`;
+ $("scoreBox").innerHTML=`<div class="scorebig">${total} / 12</div><div>Punkte</div><div class="note">NOTE ${resultData.note}</div>`;
+ $("rows").innerHTML=rows.map((r,i)=>`<div class="result-row ${r.pts===1?"ok":r.pts===.5?"half":"bad"}"><b>${i+1}. ${r.de}</b><br>Antwort: <b>${r.answer||"—"}</b><br>Lösung: <b>${r.display||r.en.join(" / ")}</b><br>${r.pts}/1 Punkt · ${r.why}</div>`).join("");
+ $("fraud").innerHTML=fraudEvents.length?`<div class="alert"><b>⚠️ Auffälligkeiten: ${fraudEvents.length}</b><br><small>${fraudEvents.join("<br>")}</small></div>`:"<p><b>✓ Keine registrierten Auffälligkeiten.</b></p>";
+ window.scrollTo(0,0);
+}
+
+function downloadSolution(){
+ let t=`LIFE DOWN UNDER – AUSFÜHRLICHE KORREKTUR\n\n${resultData.name} · ${resultData.klasse}\n${resultData.date}\nLRS: ${resultData.lrs?"ja":"nein"}\n\n`;
+ resultData.rows.forEach((r,i)=>t+=`${i+1}. ${r.de}\nAntwort: ${r.answer||"—"}\nLösung: ${r.display||r.en.join(" / ")}\nPunkte: ${r.pts}/1 (${r.why})\n\n`);
+ t+=`GESAMT: ${resultData.total}/12\nNOTE: ${resultData.note}\nAuffälligkeiten: ${resultData.fraud.length}\n${resultData.fraud.join("\n")}`;
+ const b=new Blob([t],{type:"text/plain;charset=utf-8"}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="Loesung_Life_Down_Under.txt";a.click();
+}
+
+function fraud(msg){
+ if(!started||locked)return;
+ fraudEvents.push(`${new Date().toLocaleTimeString("de-DE")}: ${msg}`);
+ try{
+  const C=window.AudioContext||window.webkitAudioContext,c=new C,o=c.createOscillator(),g=c.createGain();
+  o.connect(g);g.connect(c.destination);o.frequency.value=880;g.gain.setValueAtTime(.16,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+1.1);o.start();o.stop(c.currentTime+1.1);
+ }catch(e){}
+}
+
+document.addEventListener("visibilitychange",()=>{if(document.hidden)fraud("Seite/App verlassen")});
+window.addEventListener("pagehide",()=>fraud("Seite verlassen"));
+let w=innerWidth,h=innerHeight;
+window.addEventListener("resize",()=>{if(innerWidth<w*.78||innerHeight<h*.78)fraud("möglicher Split-Screen");w=innerWidth;h=innerHeight});
+["copy","cut","paste","contextmenu"].forEach(ev=>document.addEventListener(ev,e=>{if(started&&!locked)e.preventDefault()}));
+
+$("startBtn").onclick=start;
+$("submitBtn").onclick=submit;
+$("unlockBtn").onclick=unlock;
+$("downloadBtn").onclick=downloadSolution;
+</script>
+</body>
+</html>
